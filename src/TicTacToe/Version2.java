@@ -120,12 +120,20 @@ public class Version2 {
     }
 
     public static boolean checkWin (char sym) {
-        int sum = 0;
+        int sum = 0, sum2 = 0, sum3 =0, sum4 = 0;
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 if (map[i][j] == sym) sum++;
+                if (map[j][i] == sym) sum2++;
+                if (i == j && map[i][j] == sym) sum3++;
+                if (i+j == SIZE - 1 && map[i][j] == sym) sum4++;
+            }
+            if (sum == WIN || sum2 == WIN) break;
+            else {
+                sum = 0;
+                sum2 = 0;
             }
         }
-        return sum == WIN;
+        return (sum == WIN || sum2 == WIN || sum3 == WIN || sum4 == WIN);
     }
 }
